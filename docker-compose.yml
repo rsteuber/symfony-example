@@ -1,0 +1,52 @@
+version: '3.8'
+name: 'topfeest'
+services:
+  database:
+    container_name: mysql
+    image: mysql:8.0
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: topfeest
+      MYSQL_USER: topfeest
+      MYSQL_PASSWORD: topfeest
+    ports:
+      - '4306:3306'
+    volumes:
+      - ./.operations/mysql:/var/lib/mysql
+    networks:
+      - topfeest_network
+
+  php:
+    container_name: php
+    build:
+      context: .
+      dockerfile: ./.operations/docker/php/Dockerfile
+    expose:
+      - 9000
+      - 9003
+    volumes:
+      - ./:/var/www/topfeest:cached
+      - ./var/coverage:/opt/php-storm-coverage:cached
+    depends_on:
+      - database
+    networks:
+      - topfeest_network
+
+  nginx:
+    container_name: nginx
+    image: nginx:stable
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.operations/docker/nginx/http.conf/:/etc/nginx/conf.d/topfeest.conf:ro
+      - ./.operations/docker/nginx/ssl/:/etc/nginx/ssl
+      - ./:/var/www/topfeest:cached
+    networks:
+      - topfeest_network
+
+networks:
+  topfeest_network:
+    driver: bridge
