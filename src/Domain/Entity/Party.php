@@ -2,10 +2,12 @@
 
 namespace App\Domain\Entity;
 
-use App\Domain\Repository\PartyRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Infrastructure\Persistence\Doctrine\Repository\PartyRepository;
 
 #[ORM\Entity(repositoryClass: PartyRepository::class)]
+#[ORM\Table(name: "party")]
 class Party
 {
     #[ORM\Id]
