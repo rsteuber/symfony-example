@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Domain\Entity;
+declare(strict_types=1);
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping as ORM;
+namespace App\Infrastructure\Persistence\Doctrine\Entity;
+
 use App\Infrastructure\Persistence\Doctrine\Repository\PartyRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartyRepository::class)]
 #[ORM\Table(name: "party")]

@@ -17,13 +17,13 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Domain/Entity/'
+            - '../src/Infrastructure/Persistence/Doctrine/Entity/'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Infrastructure\Persistence\Doctrine\Repository\PartyRepository:
-        factory: [ '@doctrine.orm.default_entity_manager', getRepository ]
+    App\Infrastructure\Persistence\Doctrine\Repository\PartyRepository:
         arguments:
-            - App\Domain\Entity\Party
+            - App\Infrastructure\Persistence\Doctrine\Entity\Party
+            - '@doctrine.orm.entity_manager'

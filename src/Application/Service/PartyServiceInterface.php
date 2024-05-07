@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Service;
 
-use App\Domain\Entity\Party;
+use App\Application\DTO\PartyDTO;
+use App\Infrastructure\Persistence\Doctrine\Entity\Party;
 
 interface PartyServiceInterface
 {
-public function createParty(array $partyData): Party;
+public function createParty(PartyDTO $partyDTO): void;
 
-public function updateParty(Party $party, string $name, \DateTime $date): Party;
+public function updateParty(Party $party): void;
 
 public function deleteParty(Party $party): void;
 

@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Service;
 
-use App\Domain\Entity\Party;
+use App\Application\DTO\PartyDTO;
+use App\Infrastructure\Persistence\Doctrine\Entity\Party;
 use App\Infrastructure\Persistence\Doctrine\Repository\PartyRepository;
+use Exception;
 
 class PartyService implements PartyServiceInterface
 {
@@ -15,32 +19,30 @@ class PartyService implements PartyServiceInterface
     }
 
     /**
-     * @param array $partyData
+     * @param PartyDTO $partyDTO
      * @return Party
-     * @throws \Exception
+     * @throws Exception
      */
-    public function createParty(array $partyData): Party
+    public function createParty(PartyDTO $partyDTO): void
     {
         $party = new Party();
-        $party->setName($partyData['name']);
+        $party->setName($partyDTO->getName());
 
         try {
             $this->partyRepository->save($party);
-        } catch (\Exception $exception) {
-            throw new \Exception($exception->getMessage());
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage());
         }
-
-        return $party;
     }
 
-    public function updateParty(Party $party, string $name, \DateTime $date): Party
+    public function updateParty(Party $party): void
     {
-        // TODO: Implement updateParty() method.
+        $this->partyRepository->save($party);
     }
 
     public function deleteParty(Party $party): void
     {
-        // TODO: Implement deleteParty() method.
+        $this->partyRepository->delete($party);
     }
 
     public function getAllParties(): array
