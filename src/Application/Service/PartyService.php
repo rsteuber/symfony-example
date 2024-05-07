@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Application\Service;
 
 use App\Application\DTO\PartyDTO;
+use App\Domain\Repository\PartyRepositoryInterface;
 use App\Infrastructure\Persistence\Doctrine\Entity\Party;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Exception;
 
 class PartyService implements PartyServiceInterface
 {
-    private EntityRepository $repository;
+    private PartyRepositoryInterface $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(PartyRepositoryInterface $repository)
     {
-        $this->repository = $entityManager->getRepository(Party::class);
+        $this->repository = $repository;
     }
+
 
     /**
      * @param PartyDTO $partyDTO
