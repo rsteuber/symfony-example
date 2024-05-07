@@ -11,9 +11,9 @@ interface PartyServiceInterface
 {
 public function createParty(PartyDTO $partyDTO): Party;
 
-public function updateParty(Party $party): void;
+public function updateParty(PartyDTO $party): void;
 
-public function deleteParty(Party $party): void;
+public function deleteParty(PartyDTO $party): void;
 
 public function getAllParties(): array;
 

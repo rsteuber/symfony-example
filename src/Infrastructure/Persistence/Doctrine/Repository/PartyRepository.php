@@ -7,13 +7,17 @@ namespace App\Infrastructure\Persistence\Doctrine\Repository;
 use App\Infrastructure\Persistence\Doctrine\Entity\Party;
 use App\Domain\Repository\PartyRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 
 class PartyRepository extends ServiceEntityRepository implements PartyRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private readonly EntityManagerInterface $_em;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
+        $this->_em = $entityManager;
         parent::__construct($registry, Party::class);
     }
 

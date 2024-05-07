@@ -38,12 +38,12 @@ class PartyService implements PartyServiceInterface
         return $party;
     }
 
-    public function updateParty(Party $party): void
+    public function updateParty(PartyDTO $party): void
     {
         $this->repository->save($party);
     }
 
-    public function deleteParty(Party $party): void
+    public function deleteParty(PartyDTO $party): void
     {
         $this->repository->delete($party);
     }
