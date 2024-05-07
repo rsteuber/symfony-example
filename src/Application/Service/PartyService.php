@@ -23,7 +23,7 @@ class PartyService implements PartyServiceInterface
      * @return Party
      * @throws Exception
      */
-    public function createParty(PartyDTO $partyDTO): void
+    public function createParty(PartyDTO $partyDTO): Party
     {
         $party = new Party();
         $party->setName($partyDTO->getName());
@@ -33,6 +33,8 @@ class PartyService implements PartyServiceInterface
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage());
         }
+
+        return $party;
     }
 
     public function updateParty(Party $party): void

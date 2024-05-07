@@ -9,7 +9,7 @@ use App\Infrastructure\Persistence\Doctrine\Entity\Party;
 
 interface PartyServiceInterface
 {
-public function createParty(PartyDTO $partyDTO): void;
+public function createParty(PartyDTO $partyDTO): Party;
 
 public function updateParty(Party $party): void;
 
