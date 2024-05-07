@@ -9,6 +9,7 @@ use App\Domain\Repository\PartyRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 class PartyRepository extends ServiceEntityRepository implements PartyRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

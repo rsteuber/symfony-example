@@ -6,16 +6,17 @@ namespace App\Application\Service;
 
 use App\Application\DTO\PartyDTO;
 use App\Infrastructure\Persistence\Doctrine\Entity\Party;
-use App\Infrastructure\Persistence\Doctrine\Repository\PartyRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Exception;
 
 class PartyService implements PartyServiceInterface
 {
-    private PartyRepository $partyRepository;
+    private EntityRepository $repository;
 
-    public function __construct(PartyRepository $partyRepository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->partyRepository = $partyRepository;
+        $this->repository = $entityManager->getRepository(Party::class);
     }
 
     /**
@@ -29,7 +30,7 @@ class PartyService implements PartyServiceInterface
         $party->setName($partyDTO->getName());
 
         try {
-            $this->partyRepository->save($party);
+            $this->repository->save($party);
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage());
         }
@@ -39,17 +40,17 @@ class PartyService implements PartyServiceInterface
 
     public function updateParty(Party $party): void
     {
-        $this->partyRepository->save($party);
+        $this->repository->save($party);
     }
 
     public function deleteParty(Party $party): void
     {
-        $this->partyRepository->delete($party);
+        $this->repository->delete($party);
     }
 
     public function getAllParties(): array
     {
-        return $this->partyRepository->findAll();
+        return $this->repository->findAll();
     }
 
     public function getPartyById(int $id): ?Party
