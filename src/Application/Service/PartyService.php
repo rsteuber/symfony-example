@@ -9,15 +9,12 @@ use App\Domain\Repository\PartyRepositoryInterface;
 use App\Infrastructure\Persistence\Doctrine\Entity\Party;
 use Exception;
 
-class PartyService implements PartyServiceInterface
+readonly class PartyService implements PartyServiceInterface
 {
-    private PartyRepositoryInterface $repository;
-
-    public function __construct(PartyRepositoryInterface $repository)
+    public function __construct(
+        private PartyRepositoryInterface $repository)
     {
-        $this->repository = $repository;
     }
-
 
     /**
      * @param PartyDTO $partyDTO

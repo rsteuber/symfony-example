@@ -13,18 +13,18 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class PartyRepository extends ServiceEntityRepository implements PartyRepositoryInterface
 {
-    private readonly EntityManagerInterface $_em;
-
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(
+        ManagerRegistry $registry,
+        private EntityManagerInterface $entityManager
+    )
     {
-        $this->_em = $entityManager;
         parent::__construct($registry, Party::class);
     }
 
     public function save(Party $party): void
     {
-        $this->_em->persist($party);
-        $this->_em->flush();
+        $this->entityManager->persist($party);
+        $this->entityManager->flush();
     }
 
     public function findByName(string $name): ?Party
