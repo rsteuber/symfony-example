@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Symfony\Controller;
+namespace App\Infrastructure\Symfony\Controller\Api;
 
 use App\Application\DTO\PartyDTO;
+use App\Application\Service\PartyService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Application\Service\PartyService;
 
 #[Route('/api', name: 'app_')]
 class PartyController extends AbstractController
