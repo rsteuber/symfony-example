@@ -9,7 +9,7 @@ use App\Infrastructure\Persistence\Doctrine\Entity\User;
 Interface UserRepositoryInterface
 {
 
-    public function save(User $user): void;
+    public function save(User $user): User;
 
 
     public function update(User $user): void;

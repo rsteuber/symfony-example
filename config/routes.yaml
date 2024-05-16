@@ -4,5 +4,5 @@ controllers:
         namespace: App\Infrastructure\Symfony\Controller
     type: attribute
 
-api_login_check:
+jwt_auth:
     path: /api/login_check

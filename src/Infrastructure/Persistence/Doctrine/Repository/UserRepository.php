@@ -12,10 +12,12 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public function save(User $user): void
+    public function save(User $user): User
     {
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+
+        return $user;
     }
 
     public function update(User $user): void
